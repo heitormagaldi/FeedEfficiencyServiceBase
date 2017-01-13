@@ -28,6 +28,10 @@ public class DAOBase {
     public TOBase get(Connection c, TOBase t) throws Exception {
         return null;
     }
+    
+    public TOBase check(Connection c, TOBase t) throws Exception {
+        return null;
+    }
 
     public JSONArray list (Connection c) throws Exception{
         return null;

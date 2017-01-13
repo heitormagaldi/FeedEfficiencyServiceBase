@@ -67,6 +67,18 @@ public class BOFactory {
         }
            
     }
+    public static TOBase check(DAOBase d,TOBase t) throws Exception{
+        Connection c = null;
+        try{
+            c = Data.openConnection();
+            return d.check(c, t);
+        }finally{
+            c.close();
+        }
+           
+    }
+    
+    
     
     
 }

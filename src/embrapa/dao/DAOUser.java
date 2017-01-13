@@ -61,6 +61,34 @@ public class DAOUser extends DAOBase {
             rs.close();
         }
     }
+    
+    @Override
+    public TOBase check(Connection c, TOBase t) throws Exception {
+        String sql = "SELECT \"ID\",\"LOGIN\",\"PERFIL\",\"EMAIL\",\"SENHA\" FROM public.\"Usuario\" WHERE \"LOGIN\" = ? AND \"SENHA\" = ? ";
+        ResultSet rs = null;
+        
+        TOUser to = (TOUser) t;
+        List<Object> p = new ArrayList<Object>();
+       
+        p.add(to.getLogin());
+        p.add(to.getSenha());
+      
+        try {
+           
+            rs = Data.executeQuery(c, sql, p);
+
+            if (rs.next()) {
+                return new TOUser(rs);
+            } else {
+                return null;
+            }
+
+        } finally {
+            rs.close();
+        }
+    }
+    
+    
 
     @Override
     public void delete(Connection c, TOBase t) throws Exception {
@@ -69,7 +97,7 @@ public class DAOUser extends DAOBase {
         TOUser to = (TOUser) t;
 
         List<Object> p = new ArrayList<Object>();
-        p.add(to.getLogin());
+        p.add(to.getId());
 
         Data.executeUpdate(c, sql, p);
     }
