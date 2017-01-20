@@ -23,6 +23,35 @@ public class DAORefeicao extends DAOBase {
     }
 
     @Override
+    public JSONArray listCodigo(Connection c, TOBase t) throws Exception {
+        String sql = "SELECT \"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\""
+                + ",\"CONSUMIDO\",\"DATA\",\"HORA\" FROM public.\"Refeicao\" WHERE \"ANIMAL\" = ?  LIMIT '100'";
+        //order by \"CODIGO\"
+        ResultSet rs = null;
+        JSONArray ja = new JSONArray();
+        
+        TORefeicao to = (TORefeicao) t;
+
+        List<Object> p = new ArrayList<Object>();
+        p.add(to.getCodigo());
+                 
+
+        //Data.executeUpdate(c, sql, p);
+        
+        try {
+            rs = Data.executeQuery(c, sql,p);
+            while (rs.next()) {
+                to = new TORefeicao(rs);
+                ja.put(to.getJson());
+            }
+
+        } finally {
+            rs.close();
+        }
+        return ja;
+    }
+    
+    @Override
     public JSONArray list(Connection c) throws Exception {
         String sql = "SELECT \"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\""
                 + ",\"CONSUMIDO\",\"DATA\",\"HORA\" FROM public.\"Refeicao\" LIMIT '100' ";

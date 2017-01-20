@@ -6,7 +6,8 @@
 package embrapa.dao;
 
 import embrapa.to.TOBase;
-import embrapa.to.TOBebedouro;
+import embrapa.to.TORefeicao;
+import embrapa.to.TOTemperatura;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -17,23 +18,23 @@ import org.json.JSONArray;
  *
  * @author Heitor
  */
-public class DAOBebedouro extends DAOBase {
+public class DAOTemperatura extends DAOBase {
 
-    public DAOBebedouro() {
+    public DAOTemperatura() {
     }
-    
+
     @Override
     public JSONArray listCodigo(Connection c, TOBase t) throws Exception {
-        String sql = "SELECT \"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\""
-                + ",\"CONSUMIDO\",\"DATA\",\"HORA\" FROM public.\"Bebedouro\" WHERE \"ANIMAL\" = ?  LIMIT '100'";
+        String sql = "SELECT \"CODIGO\",\"VALOR\",\"EQUIPAMENTO\",\"SENSOR\","
+                + "\"DATA\",\"HORA\" FROM public.\"Temperatura\" WHERE \"SENSOR\" = ?  LIMIT '100'";
         //order by \"CODIGO\"
         ResultSet rs = null;
         JSONArray ja = new JSONArray();
         
-        TOBebedouro to = (TOBebedouro) t;
+        TOTemperatura to = (TOTemperatura) t;
 
         List<Object> p = new ArrayList<Object>();
-        p.add(to.getCodigo());
+        p.add(to.getSensor());
                  
 
         //Data.executeUpdate(c, sql, p);
@@ -41,7 +42,7 @@ public class DAOBebedouro extends DAOBase {
         try {
             rs = Data.executeQuery(c, sql,p);
             while (rs.next()) {
-                to = new TOBebedouro(rs);
+                to = new TOTemperatura(rs);
                 ja.put(to.getJson());
             }
 
@@ -53,8 +54,8 @@ public class DAOBebedouro extends DAOBase {
     
     @Override
     public JSONArray list(Connection c) throws Exception {
-        String sql = "SELECT \"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\""
-                + ",\"CONSUMIDO\",\"DATA\",\"HORA\" FROM public.\"Bebedouro\" LIMIT '100' ";
+        String sql = "SELECT \"CODIGO\",\"VALOR\",\"EQUIPAMENTO\",\"SENSOR\""
+                + ",\"DATA\",\"HORA\" FROM public.\"Temperatura\" LIMIT '100' ";
         //order by \"CODIGO\"
         ResultSet rs = null;
         JSONArray ja = new JSONArray();
@@ -62,7 +63,7 @@ public class DAOBebedouro extends DAOBase {
         try {
             rs = Data.executeQuery(c, sql);
             while (rs.next()) {
-                TOBebedouro t = new TOBebedouro(rs);
+                TOTemperatura t = new TOTemperatura(rs);
                 ja.put(t.getJson());
 
             }
@@ -75,17 +76,17 @@ public class DAOBebedouro extends DAOBase {
 
     @Override
     public TOBase get(Connection c, TOBase t) throws Exception {
-        String sql = "SELECT \"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\""
-                + ",\"CONSUMIDO\",\"DATA\",\"HORA\" FROM public.\"Bebedouro\" WHERE \"CODIGO\" = ? ";
+        String sql = "SELECT \"CODIGO\",\"VALOR\",\"EQUIPAMENTO\",\"SENSOR\""
+                + ",\"DATA\",\"HORA\" FROM public.\"Temperatura\" WHERE \"CODIGO\" = ? ";
 
         ResultSet rs = null;
 
         try {
-            TOBebedouro to = (TOBebedouro) t;
+            TOTemperatura to = (TOTemperatura) t;
             rs = Data.executeQuery(c, sql, to.getCodigo());
 
             if (rs.next()) {
-                return new TOBebedouro(rs);
+                return new TOTemperatura(rs);
             } else {
                 return null;
             }
@@ -97,9 +98,9 @@ public class DAOBebedouro extends DAOBase {
 
     @Override
     public void delete(Connection c, TOBase t) throws Exception {
-        String sql = "DELETE FROM public.\"Bebedouro\" WHERE \"CODIGO\" = ?";
+        String sql = "DELETE FROM public.\"Temperatura\" WHERE \"CODIGO\" = ?";
 
-        TOBebedouro to = (TOBebedouro) t;
+        TOTemperatura to = (TOTemperatura) t;
 
         List<Object> p = new ArrayList<Object>();
         p.add(to.getCodigo());
@@ -109,19 +110,16 @@ public class DAOBebedouro extends DAOBase {
 
     @Override
     public void update(Connection c, TOBase t) throws Exception {
-        String sql = "UPDATE public.\"Bebedouro\" SET \"ANIMAL\" = ?,"
-                + " \"ID\" = ? ,\"PESO\" = ? ,\"DURACAO\" = ?"
-                + ",\"CONSUMIDO\" = ?,\"DATA\" = ?,\"HORA\" = ? WHERE \"CODIGO\" = ?";
+        String sql = "UPDATE public.\"Temperatura\" SET \"VALOR\" = ?,"
+                + " \"EQUIPAMENTO\" = ? ,\"SENSOR\" = ? ,\"DATA\" = ?,\"HORA\" = ? WHERE \"CODIGO\" = ?";
 
-        TOBebedouro to = (TOBebedouro) t;
+        TOTemperatura to = (TOTemperatura) t;
 
         List<Object> p = new ArrayList<Object>();
 
-        p.add(to.getAnimal());
-        p.add(to.getId());
-        p.add(to.getPeso());
-        p.add(to.getDuracao());
-        p.add(to.getConsumido());
+        p.add(to.getValor());
+        p.add(to.getEquipamento());
+        p.add(to.getSensor());
         p.add(to.getData());
         p.add(to.getHora());
         p.add(to.getCodigo());
@@ -132,24 +130,23 @@ public class DAOBebedouro extends DAOBase {
     @Override
     public void insert(Connection c, TOBase t) throws Exception {
 
-        String sql = "INSERT INTO public.\"Bebedouro\""
-                + "(\"CODIGO\",\"ANIMAL\",\"ID\",\"PESO\",\"DURACAO\","
-                + "\"CONSUMIDO\",\"DATA\",\"HORA\")"
+        String sql = "INSERT INTO public.\"Temperatura\""
+                + "(\"CODIGO\",\"VALOR\",\"EQUIPAMENTO\",\"SENSOR\",\"DATA\",\"HORA\")"
                 + "VALUES"
-                + "(?,?,?,?,?,?,?,?)";
+                + "(?,?,?,?,?,?)";
 
-        TOBebedouro to = (TOBebedouro) t;
+        TOTemperatura to = (TOTemperatura) t;
 
         List<Object> p = new ArrayList<Object>();
 
         p.add(to.getCodigo());
-        p.add(to.getAnimal());
-        p.add(to.getId());
-        p.add(to.getPeso());
-        p.add(to.getDuracao());
-        p.add(to.getConsumido());
+        p.add(to.getValor());
+        p.add(to.getEquipamento());
+        p.add(to.getSensor());
         p.add(to.getData());
         p.add(to.getHora());
+        
+        
         
         Data.executeUpdate(c, sql, p);
 
