@@ -6,7 +6,6 @@
 package embrapa.dao;
 
 import embrapa.to.TOBase;
-import embrapa.to.TORefeicao;
 import embrapa.to.TOTemperatura;
 import java.sql.Connection;
 import java.sql.ResultSet;
