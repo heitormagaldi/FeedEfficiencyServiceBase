@@ -31,6 +31,14 @@ public class DAOAnimal extends DAOBase {
     public JSONArray list(Connection c) throws Exception {
         String sql = "SELECT \"CODIGO\",\"REGISTRO\",\"MANEJO\",\"RACA\",\"COBERTURA\""
                 + ",\"NASCIMENTO\",\"NOME\",\"SEXO\" FROM public.\"Animal\" order by \"CODIGO\"";
+        
+        
+        /*String sql = "SELECT \"Animal\".\"CODIGO\",\"Animal\".\"REGISTRO\",\"Animal\".\"MANEJO\",\"Raca\".\"DESCRICAO\" as \"RACA\",\"Animal\".\"COBERTURA\""
+                + ",\"Animal\".\"NASCIMENTO\",\"Animal\".\"NOME\",\"Animal\".\"SEXO\" FROM public.\"Animal\",public.\"Raca\" "
+                + "where \"Animal\".\"RACA\"=\"Raca\".\"CODIGO\" order by \"CODIGO\"";
+        */
+        //SELECT "Animal"."CODIGO","Animal"."REGISTRO","Animal"."MANEJO","Raca"."DESCRICAO","Animal"."COBERTURA","Animal"."NASCIMENTO","Animal"."NOME","Animal"."SEXO" FROM public."Animal",public."Raca" where "Animal"."RACA"="Raca"."CODIGO"  order by "CODIGO"
+        
         ResultSet rs = null;
         JSONArray ja = new JSONArray();
 
