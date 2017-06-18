@@ -39,5 +39,8 @@ public class DAOBase {
     public JSONArray listCodigo (Connection c, TOBase t) throws Exception{
         return null;
     }
+    public int count (Connection c) throws Exception{
+        return 0;
+    }
     
 }

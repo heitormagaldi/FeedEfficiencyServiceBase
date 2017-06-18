@@ -135,6 +135,27 @@ public class DAOAnimal extends DAOBase {
         Data.executeUpdate(c, sql, p);
 
     }
+    @Override
+    public int count(Connection c) throws Exception {
+        String sql = "SELECT * FROM public.\"Animal\" ";
+        ResultSet rs = null;
+        TOAnimal to = new TOAnimal();
+        
+        try {
+            rs = Data.executeQuery(c, sql,to);
+            
+            int Contador = 0;
+            while(rs.next()){										                                   //mesmo usando um select *, nesse ponto defino que quero usar	
+		Contador ++;
+            }
+            
+            
+           return Contador;
+
+        } finally {
+            rs.close();
+        }
+   }
 
 }
 

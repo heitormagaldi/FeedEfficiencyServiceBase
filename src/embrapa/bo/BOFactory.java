@@ -90,6 +90,19 @@ public class BOFactory {
            
     }
     
+    public static int count(DAOBase d) throws Exception{
+        Connection c = null;
+        try{
+            c = Data.openConnection();
+            return d.count(c);
+        }finally{
+            c.close();
+        }
+           
+    }
+    
+    
+    
     
     
     
