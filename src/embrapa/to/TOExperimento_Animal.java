@@ -48,39 +48,19 @@ public class TOExperimento_Animal extends TOBase {
     }
 
     /**
-     * @param experimento the experimento to set
-     */
-    public void setExperimento(String experimento) {
-        this.setExperimento(experimento);
-    }
-
-    /**
      * @return the gpd
      */
     public float getGpd() {
         return gpd;
     }
 
-    /**
-     * @param gpd the gpd to set
-     */
-    public void setGpd(String gpd) {
-        this.setGpd(gpd);
-    }
-
-    /**
+     /**
      * @return the ims
      */
     public float getIms() {
         return ims;
     }
 
-    /**
-     * @param ims the ims to set
-     */
-    public void setIms(Date ims) {
-        this.setIms(ims);
-    }
 
     /**
      * @return the pm_medio
@@ -89,12 +69,6 @@ public class TOExperimento_Animal extends TOBase {
         return pm_medio;
     }
 
-    /**
-     * @param pm_medio the pm_medio to set
-     */
-    public void setPm_medio(Date pm_medio) {
-        this.setPm_medio(pm_medio);
-    }
     public TOExperimento_Animal(ResultSet rs) throws Exception {
         this.animal = rs.getInt("animal");
         this.experimento = rs.getInt("experimento");
