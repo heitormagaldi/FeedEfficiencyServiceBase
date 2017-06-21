@@ -139,10 +139,9 @@ public class DAOAnimal extends DAOBase {
     public int count(Connection c) throws Exception {
         String sql = "SELECT * FROM public.\"Animal\" ";
         ResultSet rs = null;
-        TOAnimal to = new TOAnimal();
-        
+              
         try {
-            rs = Data.executeQuery(c, sql,to);
+            rs = Data.executeQuery(c, sql);
             
             int Contador = 0;
             while(rs.next()){										                                   //mesmo usando um select *, nesse ponto defino que quero usar	

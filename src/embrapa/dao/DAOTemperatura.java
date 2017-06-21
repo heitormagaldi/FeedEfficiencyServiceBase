@@ -155,10 +155,9 @@ public class DAOTemperatura extends DAOBase {
     public int count(Connection c) throws Exception {
         String sql = "SELECT * FROM public.\"Temperatura\" ";
         ResultSet rs = null;
-        TOTemperatura to = new TOTemperatura();
         
         try {
-            rs = Data.executeQuery(c, sql,to);
+            rs = Data.executeQuery(c, sql);
             
             int Contador = 0;
             while(rs.next()){										                                   //mesmo usando um select *, nesse ponto defino que quero usar	
