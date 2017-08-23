@@ -104,6 +104,17 @@ public class TOAnimal extends TOBase {
         this.nome = rs.getString("nome");
         this.sexo = rs.getString("sexo");
     }
+    public TOAnimal(int codigo,String registro,String manejo, int raca,
+            int cobertura, Date data,String nome, String sexo) throws Exception {
+        this.codigo = codigo;
+        this.registro = registro;
+        this.manejo = manejo;
+        this.raca = raca;
+        this.cobertura = cobertura;
+        this.nascimento = data;
+        this.nome = nome;
+        this.sexo = sexo;
+    }
 
     @Override
     public JSONObject getJson() {
