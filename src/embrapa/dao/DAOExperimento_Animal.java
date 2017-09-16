@@ -6,6 +6,7 @@
 package embrapa.dao;
 import embrapa.to.TOExperimento_Animal;
 import embrapa.to.TOBase;
+import embrapa.to.TOExperimento;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -42,6 +43,34 @@ public class DAOExperimento_Animal extends DAOBase {
         }
         return ja;
     }
+    
+    
+    @Override
+    public JSONArray listCodigo (Connection c, TOBase t) throws Exception{
+        String sql = "SELECT \"ANIMAL\",\"EXPERIMENTO\",\"GPD\",\"IMS\",\"PM_MEDIO\""
+                + " FROM public.\"Experimento_Animal\" WHERE \"EXPERIMENTO\" = ? ";
+        //order by \"CODIGO\"
+        ResultSet rs = null;
+        JSONArray ja = new JSONArray();
+        
+        TOExperimento_Animal to = (TOExperimento_Animal) t;
+
+        List<Object> p = new ArrayList<Object>();
+        p.add(to.getExperimento());
+       
+        try {
+            rs = Data.executeQuery(c, sql,p);
+            while (rs.next()) {
+                to = new TOExperimento_Animal(rs);
+                ja.put(to.getJson());
+            }
+
+        } finally {
+            rs.close();
+        }
+        return ja;
+    }
+    
 
     @Override
     public TOBase get(Connection c, TOBase t) throws Exception {

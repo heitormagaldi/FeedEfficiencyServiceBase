@@ -79,6 +79,12 @@ public class TOAnimal extends TOBase {
         return nome;
     }
 
+    public String getPrimeiroNome(){
+        String[] NomeSeparado = nome.split(" ");
+        return NomeSeparado[0].toUpperCase();
+              
+    }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
