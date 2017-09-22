@@ -24,7 +24,19 @@ public class TOExperimento extends TOBase {
     private String sigla;
     private Date inicio;
     private Date termino;
-
+    
+    
+    public TOExperimento(Integer lnCodigo, String lcDescricao,
+            String lcSigla, Date ldInicio, Date ldTermino){
+        
+        this.codigo = lnCodigo;
+        this.descricao = lcDescricao;
+        this.inicio = ldInicio;
+        this.termino = ldTermino;
+        this.sigla = lcSigla;
+         
+        
+    }
     /**
      * @return the codigo
      */
