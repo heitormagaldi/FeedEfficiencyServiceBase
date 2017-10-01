@@ -20,8 +20,13 @@ public class Data {
     public static Connection openConnectionPostgre(String server, String database, String user, String password) throws Exception {
         Connection conn = null;
         Class.forName("org.postgresql.Driver");
+        
+        
+        //conn = DriverManager.getConnection("jdbc:postgresql://" + server
+        //        + ":5432/" + database, user, password);
+        
         conn = DriverManager.getConnection("jdbc:postgresql://" + server
-                + ":5432/" + database, user, password);
+                + ":5433/" + database, user, password);
         return conn;
     }
 
