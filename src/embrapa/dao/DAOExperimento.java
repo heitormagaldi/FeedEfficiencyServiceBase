@@ -25,7 +25,7 @@ public class DAOExperimento extends DAOBase{
     @Override
     public JSONArray list(Connection c) throws Exception {
         String sql = "SELECT \"CODIGO\",\"DESCRICAO\",\"SIGLA\",\"INICIO\",\"TERMINO\""
-                + " FROM public.\"Experimento\" order by \"CODIGO\"";
+                + " FROM public.\"Experimento\" order by \"INICIO\"";
         
          
         ResultSet rs = null;
